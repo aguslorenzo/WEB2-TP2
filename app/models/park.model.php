@@ -34,7 +34,7 @@ class ParkModel{
         return $parks;
     }
 
-    function deleteParkById($id){
+    function deletePark($id){
         $query = $this->db->prepare("DELETE FROM parks WHERE id=?");
         $query->execute([$id]);
     }
