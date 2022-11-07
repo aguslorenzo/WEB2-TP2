@@ -23,4 +23,18 @@ class ApiParkController {
         $parks = $this->model->getAll();
         $this->view->response($parks);
     }
+
+    public function getPark($params = null){
+        $id = $params[':ID'];
+        $park = $this->model->getPark($id);
+
+        if ($park){
+            $this->view->response($park);
+        }
+        else {
+            $this->view->response("El parque con el id $id no existe, 404");
+        }
+    }
+
+    
 }

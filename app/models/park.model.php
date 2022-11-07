@@ -14,7 +14,7 @@ class ParkModel{
         return $parks;
     }
     
-    function get($id){
+    function getPark($id){
         $query = $this->db->prepare("SELECT * FROM parks WHERE id=?");
         $query->execute([$id]);
         $park= $query->fetch(PDO::FETCH_OBJ);
