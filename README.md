@@ -1,9 +1,9 @@
 REQUERIMIENTOS FUNCIONALES MINIMOS
 1. La API debe ser RESTful #filmina que es restfull segun la catedra.
-2. Debe tener al menos un getAll, sea para parques, provincias o reseñas.
+2. Debe tener al menos un getAll, sea para parques, provincias o reseñas. OK 1 parques
 3. Al getAll incorporar una dupla sortby orderby que permita ordenar de manera asc o desc por un campo de la tabla.
-4. Debe tener al menos un getById (parques, provincias o reseñas).
-5. Debe tener al menos un agregar o un modificar.
+4. Debe tener al menos un getById (parques, provincias o reseñas). OK 1 parques
+5. Debe tener al menos un agregar o un modificar. OK 1 parques
 6. La API debe manejar de manera correcta las posibles respuesas HTTP (200, 201, 400, 404, 500).
 
 REQUERIMIENTOS FUNCIONALES OPTATIVOS

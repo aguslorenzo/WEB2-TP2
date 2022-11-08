@@ -1,18 +1,18 @@
 "use strict"
-const URL = "http://localhost/WEB2-TPE2/api/parks";
+const URL = "http://localhost/WEB2-TPE2/api/parks/";
 
 async function getAll(){
 
     try {
         let response = await fetch(URL);
         if (!response.ok) {
-            throw new Error ('No existe');
+            throw new Error ('No existe'); //se puede mejorar este error
         }
         let parks = await response.json();
     
         showParks(parks);
     } catch(e){
-        console.log(e);
+        console.log(e); //tratar el error de la forma que queramos
     }
 
 }

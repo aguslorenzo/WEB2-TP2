@@ -39,7 +39,7 @@ class ParkModel{
         $query->execute([$id]);
     }
     
-    function editParkById($id, $name, $description, $price, $province){
+    function updatePark($id, $name, $description, $price, $province){
         $query = $this->db->prepare("UPDATE parks SET name=? , description=? , price=?, id_province_fk=? WHERE id= ?");
         $query->execute([$name, $description, $price, $province, $id]);
     }

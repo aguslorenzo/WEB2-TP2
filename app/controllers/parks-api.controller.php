@@ -55,9 +55,22 @@ class ApiParkController {
             $this->view->response("Debe completar los datos", 400);
         } else {
             $id = $this->model->insert($park->name, $park->description, $park->price, $park->id_province_fk);
-            $task = $this->model->getPark($id);
+            $park = $this->model->getPark($id);
             $this->view->response($park, 201);
         }
     }
 
+    public function updatePark($params = null){
+        $id = $params[':ID'];
+        $previousPark = $this->model->getPark($id); //validacion si no está en la db 
+        
+        $park = $this->getData();
+        $park->$id = $id;
+        if (empty($park->name) || empty($park->description) || empty($park->price) || empty($park->id_province_fk)){
+            $this->view->response("Debe completar los datos", 400);
+        } else {
+            $id = $this->model->updatePark($park->$id, $park->name, $park->description, $park->price, $park->id_province_fk);
+            $this->view->response($park, 200);
+        }
+    }
 }
