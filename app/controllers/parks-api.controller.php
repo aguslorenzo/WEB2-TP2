@@ -20,8 +20,12 @@ class ApiParkController {
     }
 
     public function getParks($params = null){
-        $parks = $this->model->getAll();
-        $this->view->response($parks);
+        $order = $_GET['order'];
+        if (!empty($order)){
+            $order = strtoupper($order);
+            $parks = $this->model->getAll($order);
+            $this->view->response($parks);
+        }
     }
 
     public function getPark($params = null){
