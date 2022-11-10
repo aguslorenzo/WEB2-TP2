@@ -7,7 +7,7 @@ class ParkModel{
         $this->db = new PDO('mysql:host=localhost;'.'dbname=parks;charset=utf8', 'root', '');
     }
 
-    function getAll($order){
+    function getAll($order = null){
         if ($order=='DESC'){
             $query = $this->db->prepare('SELECT * FROM parks ORDER BY name DESC');
         }
@@ -30,7 +30,7 @@ class ParkModel{
     function insert($name, $description, $price, $province) {
         $query = $this->db->prepare("INSERT INTO parks (name, description, price, id_province_fk) VALUES (?, ? ,? ,?)");
         $query->execute([$name, $description, $price, $province]);
-        
+        return $this->db->lastInsertId();
     }
 
     function getParksByProvince($provinceId){
@@ -48,5 +48,6 @@ class ParkModel{
     function updatePark($id, $name, $description, $price, $province){
         $query = $this->db->prepare("UPDATE parks SET name=? , description=? , price=?, id_province_fk=? WHERE id= ?");
         $query->execute([$name, $description, $price, $province, $id]);
+        return $id;
     }
 }

@@ -20,12 +20,12 @@ class ApiParkController {
     }
 
     public function getParks($params = null){
-        $order = $_GET['order'];
-        if (!empty($order)){
+        if ((isset($_GET['order'])) && (!empty($_GET['order']))) {
+            $order = $_GET['order'];
             $order = strtoupper($order);
-            $parks = $this->model->getAll($order);
-            $this->view->response($parks);
         }
+        $parks = $this->model->getAll();
+        $this->view->response($parks);
     }
 
     public function getPark($params = null){
@@ -74,6 +74,7 @@ class ApiParkController {
             $this->view->response("Debe completar los datos", 400);
         } else {
             $id = $this->model->updatePark($park->$id, $park->name, $park->description, $park->price, $park->id_province_fk);
+            $park = $this->model->getPark($id);
             $this->view->response($park, 200);
         }
     }
