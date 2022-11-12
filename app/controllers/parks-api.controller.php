@@ -19,28 +19,42 @@ class ApiParkController {
         return json_decode($this->data);
     }
 
-    public function getParks($params = null){ //validacion del limit y manejo de errores
-        if ((isset($_GET['order'])) && (!empty($_GET['order'])) && (isset($_GET['limit'])) && (!empty($_GET['limit']))) {
-            $order = $_GET['order'];
+    public function getParks(){
+        $page=1;
+        $order= "ASC";
+        $limit = 100;
+        $offset = 0;
 
-            $page = 1;
-            if (!empty($_GET['page'])) {
-                $page = filter_input(INPUT_GET, 'page', FILTER_VALIDATE_INT);
-                if (false === $page){
-                    $page = 1;
-                }
+        if (isset($_GET['page']) && !empty($_GET['page'])) {
+            $queryPage = $_GET['page'];
+            if (is_numeric($queryPage) && $queryPage>0){
+                $page = $queryPage;
+            }else{
+                $this->view->response("Bad request",400);
+                die();
             }
-
-            $limit = $_GET['limit'];
-            if (!empty($_GET['limit'])){
-                $offset = ($page - 1) * $limit;
-            }
-//cuando limit esta vacio me lo ordena asc por la query
-            $order = strtoupper($order);
-            $parks = $this->model->getAll($order, $limit, $offset);
-        } else{
-            $parks = $this->model->getAll();
         }
+        if(isset($_GET['order']) && !empty($_GET['order'])){
+            $queryOrder = strtoupper($_GET['order']);
+            if ($queryOrder == "DESC" || $queryOrder == "ASC"){
+                $order = $queryOrder;
+            }else{
+                $this->view->response("Bad request",400);
+                die();
+            }
+        }
+        if (isset($_GET['limit']) && !empty($_GET['limit'])){
+            $queryLimit = $_GET['limit'];
+            if (is_numeric($queryLimit)&&$queryLimit>0){
+                $limit = $queryLimit;
+                $offset = ($page - 1) * $limit;
+            }else{
+                $this->view->response("Bad request",400);
+                die();
+            }
+        }
+        
+        $parks = $this->model->getAll($order, $limit, $offset);
         $this->view->response($parks);
     }
 

@@ -4,17 +4,13 @@ class ParkModel{
     private $db;
 
     public function __construct() {
-        $this->db = new PDO('mysql:host=localhost;'.'dbname=parks;charset=utf8', 'root', '');
+        $this->db = new PDO('mysql:host=localhost;'.'dbname=turismoarg;charset=utf8', 'root', '');
     }
 
-    function getAll($order = 'ASC', $limit = null, $offset = null){
-        if (($order == 'DESC') || ($order == 'ASC') && (isset($limit, $offset))){
-            $query= $this->db->prepare('SELECT * FROM parks ORDER BY name ' . $order . ' LIMIT ' . $offset . "," . $limit);
-            $query->execute();
-        } else {
-            $query= $this->db->prepare('SELECT * FROM parks ORDER BY name');
-            $query->execute();
-        }
+    function getAll($order, $limit, $offset){
+        $query= $this->db->prepare('SELECT * FROM parks ORDER BY name ' . $order . ' LIMIT ' . $offset . "," . $limit);
+        $query->execute();
+
         $parks = $query->fetchAll(PDO::FETCH_OBJ);
         return $parks;
     }
