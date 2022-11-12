@@ -7,10 +7,10 @@ REQUERIMIENTOS FUNCIONALES MINIMOS
 [x]. La API debe manejar de manera correcta las posibles respuesas HTTP (200, 201, 400, 404, 500).
 
 REQUERIMIENTOS FUNCIONALES OPTATIVOS
-7. El getAll debe poder paginarse.
-8. El getAll debe poder filtrarse por un valor específico de cualquiera de sus columnas (filterby - reseñas).
-9. Igual al punto 3 pero por cualquier columna.
-10. API auth para agregar o modificar.
+[]. El getAll debe poder paginarse. 
+[]. El getAll debe poder filtrarse por un valor específico de cualquiera de sus columnas (filterby - reseñas).
+[]. Igual al punto 3 pero por cualquier columna.
+[]. API auth para agregar o modificar.
 
 REQUERIMIENTOS NO FUNCIONALES OBLIGATORIOS
 - Documentar cada api en un READMME.md para su posterior uso por un tercero (una descripción de cada endpoint, como se usan y ejemplos).

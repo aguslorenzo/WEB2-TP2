@@ -19,12 +19,28 @@ class ApiParkController {
         return json_decode($this->data);
     }
 
-    public function getParks($params = null){
-        if ((isset($_GET['order'])) && (!empty($_GET['order']))) {
+    public function getParks($params = null){ //validacion del limit y manejo de errores
+        if ((isset($_GET['order'])) && (!empty($_GET['order'])) && (isset($_GET['limit'])) && (!empty($_GET['limit']))) {
             $order = $_GET['order'];
+
+            $page = 1;
+            if (!empty($_GET['page'])) {
+                $page = filter_input(INPUT_GET, 'page', FILTER_VALIDATE_INT);
+                if (false === $page){
+                    $page = 1;
+                }
+            }
+
+            $limit = $_GET['limit'];
+            if (!empty($_GET['limit'])){
+                $offset = ($page - 1) * $limit;
+            }
+//cuando limit esta vacio me lo ordena asc por la query
             $order = strtoupper($order);
+            $parks = $this->model->getAll($order, $limit, $offset);
+        } else{
+            $parks = $this->model->getAll();
         }
-        $parks = $this->model->getAll();
         $this->view->response($parks);
     }
 
@@ -52,7 +68,7 @@ class ApiParkController {
         }
     }
 
-    public function insertPark($params = null){
+    public function insertPark(/* $params = null */){
         $park = $this->getData();
 
         if (empty($park->name) || empty($park->description) || empty($park->price) || empty($park->id_province_fk)){
