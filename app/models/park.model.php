@@ -7,11 +7,14 @@ class ParkModel{
         $this->db = new PDO('mysql:host=localhost;'.'dbname=parks;charset=utf8', 'root', '');
     }
 
-    function getAll($order = 'ASC', $limit = 4, $offset = 0){
+    function getAll($order = 'ASC', $limit = null, $offset = null){
         if (($order == 'DESC') || ($order == 'ASC') && (isset($limit, $offset))){
             $query= $this->db->prepare('SELECT * FROM parks ORDER BY name ' . $order . ' LIMIT ' . $offset . "," . $limit);
             $query->execute();
-        }        
+        } else {
+            $query= $this->db->prepare('SELECT * FROM parks ORDER BY name');
+            $query->execute();
+        }
         $parks = $query->fetchAll(PDO::FETCH_OBJ);
         return $parks;
     }
