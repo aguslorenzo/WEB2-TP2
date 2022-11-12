@@ -20,10 +20,21 @@ class ApiParkController {
     }
 
     public function getParks(){
-        $page=1;
+        $sortBy = "name";
         $order= "ASC";
+        $page=1;
         $limit = 100;
         $offset = 0;
+        
+        if(isset($_GET['sortBy']) && !empty($_GET['sortBy'])){
+            $querySortBy = strtolower($_GET['sortBy']);
+            if(in_array($querySortBy,$this->model->getColumns())){
+                $sortBy = $querySortBy;
+            }else{
+                $this->view->response("Bad request",400);
+                die();
+            }
+        }
 
         if (isset($_GET['page']) && !empty($_GET['page'])) {
             $queryPage = $_GET['page'];
@@ -54,7 +65,7 @@ class ApiParkController {
             }
         }
         
-        $parks = $this->model->getAll($order, $limit, $offset);
+        $parks = $this->model->getAll($sortBy, $order, $limit, $offset);
         $this->view->response($parks);
     }
 

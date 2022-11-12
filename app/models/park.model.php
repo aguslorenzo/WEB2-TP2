@@ -7,8 +7,16 @@ class ParkModel{
         $this->db = new PDO('mysql:host=localhost;'.'dbname=turismoarg;charset=utf8', 'root', '');
     }
 
-    function getAll($order, $limit, $offset){
-        $query= $this->db->prepare('SELECT * FROM parks ORDER BY name ' . $order . ' LIMIT ' . $offset . "," . $limit);
+    function getColumns(){
+        $query = $this->db->prepare('SHOW columns FROM parks');
+        $query->execute();
+
+        $columns = $query->fetchAll(PDO::FETCH_COLUMN);
+        return $columns;
+    }
+
+    function getAll($sortBy, $order, $limit, $offset){
+        $query= $this->db->prepare('SELECT * FROM parks ORDER BY ' . $sortBy .' '. $order . ' LIMIT ' . $offset . "," . $limit);
         $query->execute();
 
         $parks = $query->fetchAll(PDO::FETCH_OBJ);
