@@ -77,7 +77,7 @@ class ApiParkController {
             $this->view->response($park);
         }
         else {
-            $this->view->response("El parque con el id $id no existe", 404);
+            $this->view->response("El parque con el id $id no existe.", 404);
         }
     }
 
@@ -89,7 +89,7 @@ class ApiParkController {
             $this->model->deletePark($id);
             $this->view->response($park);
         } else {
-            $this->view->response("El parque con el id $id no existe", 404);
+            $this->view->response("El parque con el id $id no existe.", 404);
         }
     }
 
@@ -97,7 +97,7 @@ class ApiParkController {
         $park = $this->getData();
 
         if (empty($park->name) || empty($park->description) || empty($park->price) || empty($park->id_province_fk)){
-            $this->view->response("Debe completar los datos", 400);
+            $this->view->response("Debe completar los datos.", 400);
         } else {
             $id = $this->model->insert($park->name, $park->description, $park->price, $park->id_province_fk);
             $park = $this->model->getPark($id);
@@ -107,16 +107,20 @@ class ApiParkController {
 
     public function updatePark($params = null){
         $id = $params[':ID'];
-        $previousPark = $this->model->getPark($id); //validacion si no está en la db 
+        /* try { */
+        $previousPark = $this->model->getPark($id); //validacion si no está en la db con un try catch??
         
         $park = $this->getData();
         $park->$id = $id;
         if (empty($park->name) || empty($park->description) || empty($park->price) || empty($park->id_province_fk)){
-            $this->view->response("Debe completar los datos", 400);
+            $this->view->response("Debe completar los datos.", 400);
         } else {
             $id = $this->model->updatePark($park->$id, $park->name, $park->description, $park->price, $park->id_province_fk);
             $park = $this->model->getPark($id);
             $this->view->response($park, 200);
         }
+        /* } catch (Exception $e) {
+            $this->view->response("El parque con el id $id no existe.", 200);
+        } */
     }
 }
