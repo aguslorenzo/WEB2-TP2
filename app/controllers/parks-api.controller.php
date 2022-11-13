@@ -40,6 +40,7 @@ class ApiParkController {
             $queryPage = $_GET['page'];
             if (is_numeric($queryPage) && $queryPage>0){
                 $page = $queryPage;
+                $offset = ($page - 1) * $limit;
             }else{
                 $this->view->response("Bad request",400);
                 die();
@@ -58,7 +59,6 @@ class ApiParkController {
             $queryLimit = $_GET['limit'];
             if (is_numeric($queryLimit)&&$queryLimit>0){
                 $limit = $queryLimit;
-                $offset = ($page - 1) * $limit;
             }else{
                 $this->view->response("Bad request",400);
                 die();

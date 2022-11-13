@@ -59,17 +59,111 @@
 /api/parks?sortBy=rating&limit=2&page=1
 
 ```
-
+"Bad request"
 ```
 
+/api/parks&order=descendente
 
+```
+"Bad request"
+```
 
 | Método HTTP                    | URL||                                          |
 |:-----------------------------|:--------------|:---------|:----------------------------------------------------|
 | GET                      | /api/parks/:ID        |
 
+**Ejemplo de response 200 OK**
+
+/api/parks/25
+
+```{
+    "id": "25",
+    "name": "Parque Nacional Campos del Tuyú",
+    "description": "El Parque Nacional se ubica en la costa sur de la Bahía Samborombón y protege uno de los últimos remanentes de pastizales pampeanos, cuya importancia se acrecienta por estar asociado a un estuario natural: en conjunto conforman un humedal de gran valor de conservación. Además, representa uno de los últimos refugios del venado de las pampas.",
+    "price": "1300",
+    "id_province_fk": "1"
+}
+```
+
+**Ejemplo de response 400 Bad request**
 /api/parks/120
 
 ```
 "El parque con el id 120 no existe."
 ```
+
+| Método HTTP                    | URL||                                          |
+|:-----------------------------|:--------------|:---------|:----------------------------------------------------|
+| DELETE                      | /api/parks/:ID        |
+
+**Ejemplo de response 200 OK**
+
+/api/parks/23
+```{
+    "id": "23",
+    "name": "Parque Nacional Pre-Delta",
+    "description": "Tiene un paisaje dominado por islas, arroyos, lagunas y riachos con la influencia del gran río Paraná, cuyas crecidas modelan un paisaje que está en continuo cambio. Además, el Paraná es un corredor de biodiversidad que aporta a la región animales y plantas típicos de la selva misionera y el Chaco.",
+    "price": "1600",
+    "id_province_fk": "2"
+}
+```
+
+**Ejemplo de response 400 Bad request**
+
+/api/parks/96
+
+```
+"El parque con el id 96 no existe."
+```
+
+| Método HTTP                    | URL||                                          |
+|:-----------------------------|:--------------|:---------|:----------------------------------------------------|
+| POST                      | /api/parks        |
+
+**Ejemplo de response 200 OK**
+
+/api/parks
+
+**Sample body**
+
+```
+{
+    "name": "Parque Nacional Pre-Delta",
+    "description": "Tiene un paisaje dominado por islas, arroyos, lagunas y riachos con la influencia del gran río Paraná, cuyas crecidas modelan un paisaje que está en continuo cambio. Además, el Paraná es un corredor de biodiversidad que aporta a la región animales y plantas típicos de la selva misionera y el Chaco.",
+    "price": "1600",
+    "id_province_fk": "2"
+}
+```
+**Sample Response**
+
+```
+{
+    "id": "80",
+    "name": "Parque Nacional Pre-Delta",
+    "description": "Tiene un paisaje dominado por islas, arroyos, lagunas y riachos con la influencia del gran río Paraná, cuyas crecidas modelan un paisaje que está en continuo cambio. Además, el Paraná es un corredor de biodiversidad que aporta a la región animales y plantas típicos de la selva misionera y el Chaco.",
+    "price": "1600",
+    "id_province_fk": "2"
+}
+```
+
+**Ejemplo de response 400 Bad request**
+
+/api/parks
+
+**Sample Body**
+```
+{
+    "name": "Parque Nacional Pre-Delta",
+    "description": "Tiene un paisaje dominado por islas, arroyos, lagunas y riachos con la influencia del gran río Paraná, cuyas crecidas modelan un paisaje que está en continuo cambio. Además, el Paraná es un corredor de biodiversidad que aporta a la región animales y plantas típicos de la selva misionera y el Chaco.",
+    "id_province_fk": "2"
+}
+```
+**Sample Response**
+
+```
+"Debe completar los datos."
+```
+
+| Método HTTP                    | URL||                                          |
+|:-----------------------------|:--------------|:---------|:----------------------------------------------------|
+| PUT                      | /api/parks/:ID        |
