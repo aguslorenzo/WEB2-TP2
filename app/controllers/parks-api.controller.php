@@ -107,8 +107,11 @@ class ApiParkController {
 
     public function updatePark($params = null){
         $id = $params[':ID'];
-        /* try { */
-        $previousPark = $this->model->getPark($id); //validacion si no está en la db con un try catch??
+        $previousPark = $this->model->getPark($id);
+        if (!$previousPark){
+            $this->view->response("El parque con el id $id no existe.", 404);
+            die();
+        }
         
         $park = $this->getData();
         $park->$id = $id;
@@ -119,8 +122,5 @@ class ApiParkController {
             $park = $this->model->getPark($id);
             $this->view->response($park, 200);
         }
-        /* } catch (Exception $e) {
-            $this->view->response("El parque con el id $id no existe.", 200);
-        } */
     }
 }

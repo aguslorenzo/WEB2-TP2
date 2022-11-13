@@ -167,3 +167,46 @@
 | Método HTTP                    | URL||                                          |
 |:-----------------------------|:--------------|:---------|:----------------------------------------------------|
 | PUT                      | /api/parks/:ID        |
+
+**Ejemplo de response 200 OK**
+
+/api/parks/28
+
+**Sample Body**
+```
+{
+    "name": "Parque Nacional Lanín",
+    "description": "Además del emblemático e imponente volcán Lanín que con sus 3.776 metros sobre el nivel del mar domina el paisaje, el área protegida incluye unos 24 lagos. Aquí se conserva una importante muestra del Bosque Patagónico y varias especies de plantas exclusivas de la región.",
+    "price": "2500",
+    "id_province_fk": "12"
+}
+```
+**Sample Response**
+```
+{
+    "id": "28",
+    "name": "Parque Nacional Lanín",
+    "description": "Además del emblemático e imponente volcán Lanín que con sus 3.776 metros sobre el nivel del mar domina el paisaje, el área protegida incluye unos 24 lagos. Aquí se conserva una importante muestra del Bosque Patagónico y varias especies de plantas exclusivas de la región.",
+    "price": "2500",
+    "id_province_fk": "12"
+}
+```
+
+**Ejemplo de response 400 Bad request**
+
+/api/parks/83
+
+**Sample Body**
+```
+{
+"name": "Parque Nacional actualizado",
+"description": "El mejor parque para disfrutar de la naturaleza en familia y con amigos.",
+"price": "2300",
+"id_province_fk": "3"
+ }
+```
+
+**Sample Response**
+```
+"El parque con el id 83 no existe."
+```
