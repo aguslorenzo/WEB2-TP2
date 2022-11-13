@@ -20,16 +20,16 @@ class ApiParkController {
     }
 
     public function getParks(){
-        $sortBy = "name";
-        $order= "ASC";
-        $page=1;
+        $order = "ASC";
+        $page = 1;
         $limit = 100;
         $offset = 0;
+        $sortBy = "name";
         
-        if(isset($_GET['sortBy']) && !empty($_GET['sortBy'])){
-            $querySortBy = strtolower($_GET['sortBy']);
-            if(in_array($querySortBy,$this->model->getColumns())){
-                $sortBy = $querySortBy;
+        if(isset($_GET['order']) && !empty($_GET['order'])){
+            $queryOrder = strtoupper($_GET['order']);
+            if ($queryOrder == "DESC" || $queryOrder == "ASC"){
+                $order = $queryOrder;
             }else{
                 $this->view->response("Bad request",400);
                 die();
@@ -46,15 +46,7 @@ class ApiParkController {
                 die();
             }
         }
-        if(isset($_GET['order']) && !empty($_GET['order'])){
-            $queryOrder = strtoupper($_GET['order']);
-            if ($queryOrder == "DESC" || $queryOrder == "ASC"){
-                $order = $queryOrder;
-            }else{
-                $this->view->response("Bad request",400);
-                die();
-            }
-        }
+        
         if (isset($_GET['limit']) && !empty($_GET['limit'])){
             $queryLimit = $_GET['limit'];
             if (is_numeric($queryLimit)&&$queryLimit>0){
@@ -64,7 +56,32 @@ class ApiParkController {
                 die();
             }
         }
-        
+
+        if(isset($_GET['sortBy']) && !empty($_GET['sortBy'])){
+            $querySortBy = strtolower($_GET['sortBy']);
+            if(in_array($querySortBy,$this->model->getColumns())){
+                $sortBy = $querySortBy;
+            }else{
+                $this->view->response("Bad request",400);
+                die();
+            }
+        }
+
+        if(isset($_GET['filterBy']) && !empty($_GET['filterBy']) && isset($_GET['value']) && !empty($_GET['value'])){
+            $filterBy = strtolower($_GET['filterBy']);
+            $value = strtolower($_GET['value']);
+
+            if(in_array($filterBy,$this->model->getColumns())){
+                $parks = $this->model->getNuevoDB($filterBy, $value);
+                $this->view->response($parks, 200);    
+                die();
+            } else {
+                $this->view->response("El campo ingresado (" . $filterBy . ") no es válido", 400);
+                die();
+            }
+
+        }
+                
         $parks = $this->model->getAll($sortBy, $order, $limit, $offset);
         $this->view->response($parks);
     }
@@ -93,7 +110,7 @@ class ApiParkController {
         }
     }
 
-    public function insertPark(/* $params = null */){
+    public function insertPark(){
         $park = $this->getData();
 
         if (empty($park->name) || empty($park->description) || empty($park->price) || empty($park->id_province_fk)){

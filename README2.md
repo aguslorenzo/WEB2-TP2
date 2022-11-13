@@ -11,6 +11,7 @@
 | `page` | integer | No       | Número de página.            |
 | `limit`               | integer       | No       | Cantidad de X por página. |
 | `sortBy`               | string       | No       | Id, name (default), description, price, id_province_fk. |
+| `filterBy`               | string       | No       | Id, name, description, price, id_province_fk. |
 
 **Ejemplos de response 200 OK**
 

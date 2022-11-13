@@ -53,4 +53,13 @@ class ParkModel{
         $query->execute([$name, $description, $price, $province, $id]);
         return $id;
     }
+
+    function getNuevoDB($filterBy, $value){
+        $query = 'SELECT * FROM parks WHERE ' . $filterBy . ' LIKE \'%' . $value . '%\'';
+        $preparedQuery = $this->db->prepare($query);
+        $preparedQuery->execute();
+
+        $parks = $preparedQuery->fetchAll(PDO::FETCH_OBJ);
+        return $parks;
+    }
 }
