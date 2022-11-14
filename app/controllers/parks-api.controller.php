@@ -1,16 +1,18 @@
 <?php
 require_once './app/models/park.model.php';
 require_once './app/views/api.view.php';
+require_once './app/helpers/auth-api.helper.php';
 
 class ApiParkController {
     private $model;
     private $view;
     private $data;
+    private $authHelper;
 
     public function __construct(){
         $this->model = new ParkModel();
         $this->view = new ApiView();
-
+        $this->authHelper = new AuthApiHelper();
         $this->data = file_get_contents("php://input");
 
     }
@@ -99,6 +101,12 @@ class ApiParkController {
     }
 
     public function deletePark($params = null){
+
+        if(!$this->authHelper->isLoggedIn()){
+            $this->view->response("Usted no está logeado", 401);
+            return;
+        }
+
         $id = $params[':ID'];
         $park = $this->model->getPark($id);
 
@@ -111,6 +119,12 @@ class ApiParkController {
     }
 
     public function insertPark(){
+
+        if(!$this->authHelper->isLoggedIn()){
+            $this->view->response("Usted no está logeado", 401);
+            return;
+        }
+
         $park = $this->getData();
 
         if (empty($park->name) || empty($park->description) || empty($park->price) || empty($park->id_province_fk)){
@@ -123,6 +137,12 @@ class ApiParkController {
     }
 
     public function updatePark($params = null){
+
+        if(!$this->authHelper->isLoggedIn()){
+            $this->view->response("Usted no está logeado", 401);
+            return;
+        }
+
         $id = $params[':ID'];
         $previousPark = $this->model->getPark($id);
         if (!$previousPark){

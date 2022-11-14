@@ -8,7 +8,7 @@ REQUERIMIENTOS FUNCIONALES MINIMOS
 
 REQUERIMIENTOS FUNCIONALES OPTATIVOS
 [x]. El getAll debe poder paginarse.
-[]. El getAll debe poder filtrarse por un valor específico de cualquiera de sus columnas (filterby - reseñas).
+[x]. El getAll debe poder filtrarse por un valor específico de cualquiera de sus columnas (filterby - reseñas).
 [x]. Igual al punto 3 pero por cualquier columna.
 []. API auth para agregar o modificar.
 

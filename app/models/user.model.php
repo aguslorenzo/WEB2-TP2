@@ -3,7 +3,7 @@ class UserModel {
     private $db;
     
     public function __construct(){
-        $this->db = new PDO('mysql:host=localhost;'.'dbname=parks;charset=utf8', 'root', '');
+        $this->db = new PDO('mysql:host=localhost;'.'dbname=turismoarg;charset=utf8', 'root', '');
     }
 
     public function getUserByEmail($email){
