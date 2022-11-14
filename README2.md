@@ -1,3 +1,11 @@
+**API REST para el recurso de parques??**
+
+Una API REST para manejar ABM de Parques Nacionales de Argentina.
+
+**Importar la base de datos**
+
+Importar desde PHPMyAdmin (por ejemplo) la base de datos que se encuentra en la carpeta db y se llama "turismoArg.sql".
+
 
 | Método HTTP                    | URL||                                          |
 |:-----------------------------|:--------------|:---------|:----------------------------------------------------|
