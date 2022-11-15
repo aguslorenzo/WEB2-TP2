@@ -184,7 +184,7 @@ El protocolo utilizado para autenticar es [OAuth (2.0)](https://oauth.net/2/).
 
 **Ejemplo de response 400 Bad request**
 
-/api/parks
+*/api/parks*
 
 **Sample Body**
 ```

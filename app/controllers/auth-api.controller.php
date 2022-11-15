@@ -3,7 +3,6 @@ require_once './app/views/api.view.php';
 require_once './app/helpers/auth-api.helper.php';
 require_once './app/models/user.model.php';
 
-//pasa los datos del basic auth (user pass) a base64
 function base64url_encode($data) {
     return rtrim(strtr(base64_encode($data), '+/', '-_'), '=');
 }
@@ -52,7 +51,7 @@ class AuthApiController{
                 'name' => $user,
                 'exp' => time()+3600
             );
-            //generas un token y  lo mostras
+
             $header = base64url_encode(json_encode($header));
             $payload = base64url_encode(json_encode($payload));
             $signature = hash_hmac('SHA256', "$header.$payload", "Key123456789", true);
