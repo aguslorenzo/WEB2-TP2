@@ -11,6 +11,8 @@ $router->addRoute('parks/:ID', 'DELETE', 'ApiParkController', 'deletePark');
 $router->addRoute('parks', 'POST', 'ApiParkController', 'insertPark');
 $router->addRoute('parks/:ID', 'PUT', 'ApiParkController', 'updatePark');
 
-$router->addRoute("auth/token", 'GET', 'AuthApiController', 'getToken');
+$router->addRoute('auth/token', 'GET', 'AuthApiController', 'getToken');
+
+$router->setDefaultRoute('ApiParkController', 'default');
 
 $router->route($_GET["resource"], $_SERVER['REQUEST_METHOD']);

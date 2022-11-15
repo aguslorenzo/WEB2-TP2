@@ -128,11 +128,17 @@ class ApiParkController {
         $park = $this->getData();
 
         if (empty($park->name) || empty($park->description) || empty($park->price) || empty($park->id_province_fk)){
-            $this->view->response("Debe completar los datos.", 400);
+            $this->view->response("Debe completar los datos requeridos.", 400);
         } else {
-            $id = $this->model->insert($park->name, $park->description, $park->price, $park->id_province_fk);
-            $park = $this->model->getPark($id);
-            $this->view->response($park, 201);
+            try {
+                $id = $this->model->insert($park->name, $park->description, $park->price, $park->id_province_fk);
+                $park = $this->model->getPark($id);
+                $this->view->response($park, 201);
+            }
+            catch(PDOException) {
+                $this->view->response("No puede crear un parque sin seleccionar una provincia válida. Agregue la provincia y vuelva a intentarlo. ", 400);
+            }
+            
         }
     }
 
@@ -159,5 +165,9 @@ class ApiParkController {
             $park = $this->model->getPark($id);
             $this->view->response($park, 200);
         }
+    }
+
+    public function default(){
+        $this->view->response("La página que solicitó no fue encontrada. Compruebe la URL e intente nuevamente.", 404);
     }
 }
