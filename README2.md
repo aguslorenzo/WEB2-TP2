@@ -1,29 +1,40 @@
-**API REST para el recurso de parques??**
+# **API REST Parques Nacionales de Argentina**
 
-Una API REST para manejar ABM de Parques Nacionales de Argentina.
+*Una API REST simple para manejar el CRUD de un catálogo de Parques Nacionales de Argentina.*
 
-**Importar la base de datos**
+# Getting started
 
-Importar desde PHPMyAdmin (por ejemplo) la base de datos que se encuentra en la carpeta db y se llama "turismoArg.sql".
+## **Importar la base de datos**
 
+Antes de comenzar, debe importar la base de datos con su gestor de preferencia (PHPMyAdmin, por ejemplo). La misma se encuentra en la carpeta del proyecto llamada "db" y se titula "turismoarg.sql".
+
+
+## **Autenticación**
+//aca me gustaría escribir algo mínimo sobre como funciona la autenticación. El tiempo de expiración por ej, algo re basic.
 
 | Método HTTP                    | URL||                                          |
 |:-----------------------------|:--------------|:---------|:----------------------------------------------------|
-| GET                      | /api/parks        |
+| GET                      | `/auth/token`       |
 
-**Query params**
+## **Listado de parques**
+| Método HTTP                    | URL||                                          |
+|:-----------------------------|:--------------|:---------|:----------------------------------------------------|
+| GET                      | `/api/parks`        |
+
+### **Query params**
 
 | Params                    | Tipo          | Requerido | Descripción                                         |
 |:-----------------------------|:--------------|:---------|:----------------------------------------------------|
-| `order`                      | string        | No      | ASC (default) o DESC.                                 |
-| `page` | integer | No       | Número de página.            |
-| `limit`               | integer       | No       | Cantidad de X por página. |
-| `sortBy`               | string       | No       | Id, name (default), description, price, id_province_fk. |
-| `filterBy`               | string       | No       | Id, name, description, price, id_province_fk. |
+| `order`                      | string        | No      | Ordena los parques de manera ascendente (default) o descendente (`ASC` o `DESC`).                                 |
+| `page` | integer | No       | Número de página. Por default `1`.            |
+| `limit`               | integer       | No       | Cantidad de parques que se desea mostrar. |
+| `sortBy`               | string       | No       | Ordena los parques según alguna de sus columnas = `Id, name (default), description, price, id_province_fk`. |
+| `filterBy`               | string       | No       | Filtra los parques según alguna de sus columnas = `Id, name, description, price, id_province_fk`. |
 
-**Ejemplos de response 200 OK**
 
-/api/parks?sortBy=name&limit=2
+### **Ejemplos de response 200 OK**
+
+*/api/parks?sortBy=name&limit=2*
 
 ```[
     {
@@ -43,7 +54,7 @@ Importar desde PHPMyAdmin (por ejemplo) la base de datos que se encuentra en la 
 ]
 ```
 
-/api/parks?sortBy=name&limit=2&page=2
+*/api/parks?sortBy=name&limit=2&page=2*
 
 ```[
     {
@@ -63,27 +74,28 @@ Importar desde PHPMyAdmin (por ejemplo) la base de datos que se encuentra en la 
 ]
 ```
 
-**Ejemplos de response 400 Bad request**
+### **Ejemplos de response 400 Bad request**
 
-/api/parks?sortBy=rating&limit=2&page=1
-
-```
-"Bad request"
-```
-
-/api/parks&order=descendente
+*/api/parks?sortBy=rating&limit=2&page=1*
 
 ```
-"Bad request"
+"Error. Compruebe la URL."
 ```
 
+*/api/parks&filterBy=weather*
+```
+"El campo ingresado ("weather") no es válido. Compruebe la URL."
+```
+
+
+## **Listar un parque**
 | Método HTTP                    | URL||                                          |
 |:-----------------------------|:--------------|:---------|:----------------------------------------------------|
 | GET                      | /api/parks/:ID        |
 
-**Ejemplo de response 200 OK**
+### **Ejemplo de response 200 OK**
 
-/api/parks/25
+*/api/parks/25*
 
 ```{
     "id": "25",
@@ -94,20 +106,21 @@ Importar desde PHPMyAdmin (por ejemplo) la base de datos que se encuentra en la 
 }
 ```
 
-**Ejemplo de response 400 Bad request**
-/api/parks/120
+### **Ejemplo de response 400 Bad request**
+*/api/parks/120*
 
 ```
 "El parque con el id 120 no existe."
 ```
 
+## **Eliminar un parque**
 | Método HTTP                    | URL||                                          |
 |:-----------------------------|:--------------|:---------|:----------------------------------------------------|
 | DELETE                      | /api/parks/:ID        |
 
-**Ejemplo de response 200 OK**
+### **Ejemplo de response 200 OK**
 
-/api/parks/23
+*/api/parks/23*
 ```{
     "id": "23",
     "name": "Parque Nacional Pre-Delta",
@@ -117,21 +130,22 @@ Importar desde PHPMyAdmin (por ejemplo) la base de datos que se encuentra en la 
 }
 ```
 
-**Ejemplo de response 400 Bad request**
+### **Ejemplo de response 400 Bad request**
 
-/api/parks/96
+*/api/parks/96*
 
 ```
 "El parque con el id 96 no existe."
 ```
 
+## **Agregar un parque**
 | Método HTTP                    | URL||                                          |
 |:-----------------------------|:--------------|:---------|:----------------------------------------------------|
 | POST                      | /api/parks        |
 
-**Ejemplo de response 200 OK**
+### **Ejemplo de response 200 OK**
 
-/api/parks
+*/api/parks*
 
 **Sample body**
 
@@ -163,8 +177,7 @@ Importar desde PHPMyAdmin (por ejemplo) la base de datos que se encuentra en la 
 ```
 {
     "name": "Parque Nacional Pre-Delta",
-    "description": "Tiene un paisaje dominado por islas, arroyos, lagunas y riachos con la influencia del gran río Paraná, cuyas crecidas modelan un paisaje que está en continuo cambio. Además, el Paraná es un corredor de biodiversidad que aporta a la región animales y plantas típicos de la selva misionera y el Chaco.",
-    "id_province_fk": "2"
+    "description": "Tiene un paisaje dominado por islas, arroyos, lagunas y riachos con la influencia del gran río Paraná, cuyas crecidas modelan un paisaje que está en continuo cambio. Además, el Paraná es un corredor de biodiversidad que aporta a la región animales y plantas típicos de la selva misionera y el Chaco."
 }
 ```
 **Sample Response**
@@ -173,13 +186,14 @@ Importar desde PHPMyAdmin (por ejemplo) la base de datos que se encuentra en la 
 "Debe completar los datos."
 ```
 
+## **Editar un parque**
 | Método HTTP                    | URL||                                          |
 |:-----------------------------|:--------------|:---------|:----------------------------------------------------|
 | PUT                      | /api/parks/:ID        |
 
-**Ejemplo de response 200 OK**
+### **Ejemplo de response 200 OK**
 
-/api/parks/28
+*/api/parks/28*
 
 **Sample Body**
 ```
@@ -201,18 +215,18 @@ Importar desde PHPMyAdmin (por ejemplo) la base de datos que se encuentra en la 
 }
 ```
 
-**Ejemplo de response 400 Bad request**
+### **Ejemplo de response 400 Bad request**
 
-/api/parks/83
+*/api/parks/83*
 
 **Sample Body**
 ```
 {
-"name": "Parque Nacional actualizado",
-"description": "El mejor parque para disfrutar de la naturaleza en familia y con amigos.",
-"price": "2300",
-"id_province_fk": "3"
- }
+    "name": "Parque Nacional actualizado",
+    "description": "El mejor parque para disfrutar de la naturaleza en familia y con amigos.",
+    "price": "2300",
+    "id_province_fk": "3"
+}
 ```
 
 **Sample Response**

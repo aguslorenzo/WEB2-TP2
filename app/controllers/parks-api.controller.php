@@ -33,7 +33,7 @@ class ApiParkController {
             if ($queryOrder == "DESC" || $queryOrder == "ASC"){
                 $order = $queryOrder;
             }else{
-                $this->view->response("Bad request",400);
+                $this->view->response("Error. Compruebe la URL.",400);
                 die();
             }
         }
@@ -44,7 +44,7 @@ class ApiParkController {
                 $page = $queryPage;
                 $offset = ($page - 1) * $limit;
             }else{
-                $this->view->response("Bad request",400);
+                $this->view->response("Error. Compruebe la URL.",400);
                 die();
             }
         }
@@ -54,7 +54,7 @@ class ApiParkController {
             if (is_numeric($queryLimit)&&$queryLimit>0){
                 $limit = $queryLimit;
             }else{
-                $this->view->response("Bad request",400);
+                $this->view->response("Error. Compruebe la URL.",400);
                 die();
             }
         }
@@ -64,7 +64,7 @@ class ApiParkController {
             if(in_array($querySortBy,$this->model->getColumns())){
                 $sortBy = $querySortBy;
             }else{
-                $this->view->response("Bad request",400);
+                $this->view->response("Error. Compruebe la URL.",400);
                 die();
             }
         }
@@ -78,7 +78,7 @@ class ApiParkController {
                 $this->view->response($parks, 200);    
                 die();
             } else {
-                $this->view->response("El campo ingresado (" . $filterBy . ") no es válido", 400);
+                $this->view->response("El campo ingresado (" . $filterBy . ") no es válido. Compruebe la URL.", 400);
                 die();
             }
 
