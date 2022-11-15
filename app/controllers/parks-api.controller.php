@@ -121,7 +121,7 @@ class ApiParkController {
     public function insertPark(){
 
         if(!$this->authHelper->isLoggedIn()){
-            $this->view->response("Usted no está logeado", 401);
+            $this->view->response("Usted no está logueado.", 401);
             return;
         }
 
@@ -138,14 +138,13 @@ class ApiParkController {
             catch(PDOException) {
                 $this->view->response("No puede crear un parque sin seleccionar una provincia válida. Agregue la provincia y vuelva a intentarlo. ", 400);
             }
-            
         }
     }
 
     public function updatePark($params = null){
 
         if(!$this->authHelper->isLoggedIn()){
-            $this->view->response("Usted no está logeado", 401);
+            $this->view->response("Usted no está logueado.", 401);
             return;
         }
 
@@ -159,7 +158,7 @@ class ApiParkController {
         $park = $this->getData();
         $park->$id = $id;
         if (empty($park->name) || empty($park->description) || empty($park->price) || empty($park->id_province_fk)){
-            $this->view->response("Debe completar los datos.", 400);
+            $this->view->response("Error. Debe completar los datos.", 400);
         } else {
             $id = $this->model->updatePark($park->$id, $park->name, $park->description, $park->price, $park->id_province_fk);
             $park = $this->model->getPark($id);

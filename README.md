@@ -8,13 +8,20 @@
 
 Antes de comenzar, debe importar la base de datos con su gestor de preferencia (PHPMyAdmin, por ejemplo). La misma se encuentra en la carpeta del proyecto llamada "db" y se titula "turismoarg.sql".
 
+---
 
 ## **Autenticación**
-//aca me gustaría escribir algo mínimo sobre como funciona la autenticación. El tiempo de expiración por ej, algo re basic.
+El protocolo utilizado para autenticar es [OAuth (2.0)](https://oauth.net/2/).
 
 | Método HTTP                    | URL||                                          |
 |:-----------------------------|:--------------|:---------|:----------------------------------------------------|
-| GET                      | `/auth/token`       |
+| GET                      | `/api/auth/token`       |
+
+| Nombre de usuario                    | Clave de acceso||                                          |
+|:-----------------------------|:--------------|:---------|:----------------------------------------------------|
+| parkadmin222@admin.com                      | web        |
+
+---
 
 ## **Listado de parques**
 | Método HTTP                    | URL||                                          |
@@ -87,6 +94,7 @@ Antes de comenzar, debe importar la base de datos con su gestor de preferencia (
 "El campo ingresado ("weather") no es válido. Compruebe la URL."
 ```
 
+---
 
 ## **Listar un parque**
 | Método HTTP                    | URL||                                          |
@@ -113,6 +121,8 @@ Antes de comenzar, debe importar la base de datos con su gestor de preferencia (
 "El parque con el id 120 no existe."
 ```
 
+---
+
 ## **Eliminar un parque**
 | Método HTTP                    | URL||                                          |
 |:-----------------------------|:--------------|:---------|:----------------------------------------------------|
@@ -137,6 +147,8 @@ Antes de comenzar, debe importar la base de datos con su gestor de preferencia (
 ```
 "El parque con el id 96 no existe."
 ```
+
+---
 
 ## **Agregar un parque**
 | Método HTTP                    | URL||                                          |
@@ -185,6 +197,8 @@ Antes de comenzar, debe importar la base de datos con su gestor de preferencia (
 ```
 "Debe completar los datos."
 ```
+
+---
 
 ## **Editar un parque**
 | Método HTTP                    | URL||                                          |
