@@ -13,20 +13,20 @@ Antes de comenzar, debe importar la base de datos con su gestor de preferencia (
 ## **Autenticación**
 El protocolo utilizado para autenticar es [OAuth (2.0)](https://oauth.net/2/).
 
-| Método HTTP                    | URL||                                          |
-|:-----------------------------|:--------------|:---------|:----------------------------------------------------|
-| GET                      | `/api/auth/token`       |
+| Método HTTP              | URL               |
+|:-------------------------|:------------------|
+| GET                      | `/api/auth/token` |
 
-| Nombre de usuario                    | Clave de acceso||                                          |
-|:-----------------------------|:--------------|:---------|:----------------------------------------------------|
-| parkadmin222@admin.com                      | web        |
+| Nombre de usuario        | Clave de acceso   |
+|:-------------------------|:------------------|
+| parkadmin222@admin.com   | web               |
 
 ---
 
 ## **Listado de parques**
-| Método HTTP                    | URL||                                          |
-|:-----------------------------|:--------------|:---------|:----------------------------------------------------|
-| GET                      | `/api/parks`        |
+| Método HTTP              | URL               |
+|:-------------------------|:------------------|
+| GET                      | `/api/parks`      |
 
 ### **Query params**
 
@@ -97,9 +97,10 @@ El protocolo utilizado para autenticar es [OAuth (2.0)](https://oauth.net/2/).
 ---
 
 ## **Listar un parque**
-| Método HTTP                    | URL||                                          |
-|:-----------------------------|:--------------|:---------|:----------------------------------------------------|
-| GET                      | /api/parks/:ID        |
+| Método HTTP              | URL               |
+|:-------------------------|:------------------|
+| GET                      | `/api/parks/:ID`  |
+
 
 ### **Ejemplo de response 200 OK**
 
@@ -124,9 +125,9 @@ El protocolo utilizado para autenticar es [OAuth (2.0)](https://oauth.net/2/).
 ---
 
 ## **Eliminar un parque**
-| Método HTTP                    | URL||                                          |
-|:-----------------------------|:--------------|:---------|:----------------------------------------------------|
-| DELETE                      | /api/parks/:ID        |
+| Método HTTP              | URL               |
+|:-------------------------|:------------------|
+| DELETE                   | `/api/parks/:ID`  |
 
 ### **Ejemplo de response 200 OK**
 
@@ -151,9 +152,9 @@ El protocolo utilizado para autenticar es [OAuth (2.0)](https://oauth.net/2/).
 ---
 
 ## **Agregar un parque**
-| Método HTTP                    | URL||                                          |
-|:-----------------------------|:--------------|:---------|:----------------------------------------------------|
-| POST                      | /api/parks        |
+| Método HTTP              | URL               |
+|:-------------------------|:------------------|
+| POST                     | `/api/parks`      |
 
 ### **Ejemplo de response 200 OK**
 
@@ -201,9 +202,10 @@ El protocolo utilizado para autenticar es [OAuth (2.0)](https://oauth.net/2/).
 ---
 
 ## **Editar un parque**
-| Método HTTP                    | URL||                                          |
-|:-----------------------------|:--------------|:---------|:----------------------------------------------------|
-| PUT                      | /api/parks/:ID        |
+| Método HTTP              | URL               |
+|:-------------------------|:------------------|
+| PUT                      | `/api/parks/:ID`  |
+
 
 ### **Ejemplo de response 200 OK**
 
