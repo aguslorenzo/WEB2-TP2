@@ -3,6 +3,7 @@ require_once './app/views/api.view.php';
 require_once './app/helpers/auth-api.helper.php';
 require_once './app/models/user.model.php';
 
+//pasa los datos del basic auth (user pass) a base64
 function base64url_encode($data) {
     return rtrim(strtr(base64_encode($data), '+/', '-_'), '=');
 }
@@ -23,7 +24,7 @@ class AuthApiController{
         $basic = $this->authHelper->getAuthHeader();
         
         if(empty($basic)){
-            $this->view->response('Usted no está autorizado', 401);
+            $this->view->response('Usted no está autorizado para realizar esta acción', 401);
             return;
         }
         $basic = explode(" ",$basic);
@@ -51,14 +52,15 @@ class AuthApiController{
                 'name' => $user,
                 'exp' => time()+3600
             );
+            //generas un token y  lo mostras
             $header = base64url_encode(json_encode($header));
             $payload = base64url_encode(json_encode($payload));
-            $signature = hash_hmac('SHA256', "$header.$payload", Key, true);
+            $signature = hash_hmac('SHA256', "$header.$payload", "Key123456789", true);
             $signature = base64url_encode($signature);
             $token = "$header.$payload.$signature";
-            $this->view->response($token);
+            $this->view->response($token, 200);
         }else{
-            $this->view->response('Ustes no está autorizado.', 401);
+            $this->view->response('Usted no está autorizado para realizar esta acción.', 401);
         }
     }
 

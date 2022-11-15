@@ -1,7 +1,5 @@
 <?php
 
-define("Key","c55fe2e2e7caaffa22780cde7751996de9403cd201c7c5538d988bb8e9fb5a09");
-
 class AuthApiHelper {
 
     function getToken(){
@@ -15,7 +13,7 @@ class AuthApiHelper {
         $payload = $token[1];
         $signature = $token[2];
 
-        $new_signature = hash_hmac('SHA256', "$header.$payload", Key, true);
+        $new_signature = hash_hmac('SHA256', "$header.$payload", "Key123456789", true);
         $new_signature = base64url_encode($new_signature);
         if($signature!=$new_signature)
             return array();
