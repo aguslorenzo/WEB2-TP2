@@ -136,7 +136,7 @@ class ApiParkController {
                 $this->view->response($park, 201);
             }
             catch(PDOException) {
-                $this->view->response("No puede crear un parque sin seleccionar una provincia válida. Agregue la provincia y vuelva a intentarlo. ", 400);
+                $this->view->response("No puede crear un parque sin seleccionar una provincia válida. Agregue la provincia y vuelva a intentarlo. ", 409);
             }
         }
     }
